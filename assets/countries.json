@@ -1,0 +1,130 @@
+[
+     {
+          "countryCode": "VN",
+          "countryName": "Vietnam",
+          "currencyCode": "VND",
+          "population": "89571130",
+          "capital": "Hanoi",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "US",
+          "countryName": "United States",
+          "currencyCode": "USD",
+          "population": "310232863",
+          "capital": "Washington",
+          "continentName": "North America"
+     },
+     {
+          "countryCode": "CN",
+          "countryName": "China",
+          "currencyCode": "CNY",
+          "population": "1330044000",
+          "capital": "Beijing",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "MY",
+          "countryName": "Malaysia",
+          "currencyCode": "MYR",
+          "population": "28274729",
+          "capital": "Kuala Lumpur",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "JP",
+          "countryName": "Japan",
+          "currencyCode": "JPY",
+          "population": "127288000",
+          "capital": "Tokyo",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "KR",
+          "countryName": "South Korea",
+          "currencyCode": "KRW",
+          "population": "48422644",
+          "capital": "Seoul",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "TW",
+          "countryName": "Taiwan",
+          "currencyCode": "TWD",
+          "population": "22894384",
+          "capital": "Taipei",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "GB",
+          "countryName": "United Kingdom",
+          "currencyCode": "GBP",
+          "population": "62348447",
+          "capital": "London",
+          "continentName": "Europe"
+     },
+     {
+          "countryCode": "ID",
+          "countryName": "Indonesia",
+          "currencyCode": "IDR",
+          "population": "242968342",
+          "capital": "Jakarta",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "SG",
+          "countryName": "Singapore",
+          "currencyCode": "SGD",
+          "population": "4701069",
+          "capital": "Singapore",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "IN",
+          "countryName": "India",
+          "currencyCode": "INR",
+          "population": "1173108018",
+          "capital": "New Delhi",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "LA",
+          "countryName": "Laos",
+          "currencyCode": "LAK",
+          "population": "6368162",
+          "capital": "Vientiane",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "TH",
+          "countryName": "Thailand",
+          "currencyCode": "THB",
+          "population": "67089500",
+          "capital": "Bangkok",
+          "continentName": "Asia"
+     },
+     {
+          "countryCode": "RU",
+          "countryName": "Russia",
+          "currencyCode": "RUB",
+          "population": "140702000",
+          "capital": "Moscow",
+          "continentName": "Europe"
+     },
+     {
+          "countryCode": "AU",
+          "countryName": "Australia",
+          "currencyCode": "AUD",
+          "population": "21515754",
+          "capital": "Canberra",
+          "continentName": "Oceania"
+     },
+     {
+          "countryCode": "NZ",
+          "countryName": "New Zealand",
+          "currencyCode": "NZD",
+          "population": "4252277",
+          "capital": "Wellington",
+          "continentName": "Oceania"
+     }
+]

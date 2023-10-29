@@ -1,0 +1,51 @@
+name: quan_ly_chi_tieu
+description: A new Flutter project.
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.6 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #bloc
+  equatable: 2.0.5
+  flutter_bloc: 8.1.3
+  #widget
+  flutter_svg: 2.0.7
+  flutter_local_notifications: 15.1.1
+  auto_size_text: 3.0.0
+
+  #local
+  intl: ^0.18.0
+  local_auth: 2.1.7
+  sqflite: 2.3.0
+  path_provider: 2.1.1
+  shared_preferences: 2.2.1
+  drift: 2.12.1
+  sqlite3_flutter_libs: 0.5.0
+  path: 1.8.3
+  easy_localization: ^3.0.2
+  sliver_tools: ^0.2.12
+  permission_handler: ^11.0.1
+  file_picker: ^6.0.0
+  restart_app: ^1.2.1
+  #network
+  dio: ^5.3.3
+  url_launcher: ^6.1.14
+  connectivity_plus: 4.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  drift_dev: ^2.12.1
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/icon/

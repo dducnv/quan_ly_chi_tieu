@@ -1,0 +1,130 @@
+[
+     {
+          "AlphabeticCode": "VND",
+          "Currency": "Đồng",
+          "Entity": "VIET NAM",
+          "MinorUnit": "0",
+          "NumericCode": 704,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "USN",
+          "Currency": "US Dollar (Next day)",
+          "Entity": "UNITED STATES OF AMERICA (THE)",
+          "MinorUnit": "2",
+          "NumericCode": 997,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "CNY",
+          "Currency": "Yuan Renminbi",
+          "Entity": "CHINA",
+          "MinorUnit": "2",
+          "NumericCode": 156,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "KRW",
+          "Currency": "Won",
+          "Entity": "KOREA (THE REPUBLIC OF)",
+          "MinorUnit": "0",
+          "NumericCode": 410,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "TWD",
+          "Currency": "New Taiwan Dollar",
+          "Entity": "TAIWAN (PROVINCE OF CHINA)",
+          "MinorUnit": "2",
+          "NumericCode": 901,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "JPY",
+          "Currency": "Yen",
+          "Entity": "JAPAN",
+          "MinorUnit": "0",
+          "NumericCode": 392,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "IDR",
+          "Currency": "Rupiah",
+          "Entity": "INDONESIA",
+          "MinorUnit": "2",
+          "NumericCode": 360,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "MYR",
+          "Currency": "Malaysian Ringgit",
+          "Entity": "MALAYSIA",
+          "MinorUnit": "2",
+          "NumericCode": 458,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "INR",
+          "Currency": "Indian Rupee",
+          "Entity": "BHUTAN",
+          "MinorUnit": "2",
+          "NumericCode": 356,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "SGD",
+          "Currency": "Singapore Dollar",
+          "Entity": "SINGAPORE",
+          "MinorUnit": "2",
+          "NumericCode": 702,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "NZD",
+          "Currency": "New Zealand Dollar",
+          "Entity": "TOKELAU",
+          "MinorUnit": "2",
+          "NumericCode": 554,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "AUD",
+          "Currency": "Australian Dollar",
+          "Entity": "TUVALU",
+          "MinorUnit": "2",
+          "NumericCode": 36,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "RUR",
+          "Currency": "Russian Ruble",
+          "Entity": "ARMENIA",
+          "MinorUnit": null,
+          "NumericCode": 810,
+          "WithdrawalDate": "1994-08"
+     },
+     {
+          "AlphabeticCode": "LAK",
+          "Currency": "Lao Kip",
+          "Entity": "LAO PEOPLE'S DEMOCRATIC REPUBLIC (THE)",
+          "MinorUnit": "2",
+          "NumericCode": 418,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "GBP",
+          "Currency": "Pound Sterling",
+          "Entity": "ISLE OF MAN",
+          "MinorUnit": "2",
+          "NumericCode": 826,
+          "WithdrawalDate": null
+     },
+     {
+          "AlphabeticCode": "THB",
+          "Currency": "Baht",
+          "Entity": "THAILAND",
+          "MinorUnit": "2",
+          "NumericCode": 764,
+          "WithdrawalDate": null
+     }
+]
