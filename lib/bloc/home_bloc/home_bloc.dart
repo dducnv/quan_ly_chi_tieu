@@ -148,8 +148,8 @@ class HomeBloc extends BaseBloc {
           emit(GetListCategoryTransactionState()),
         });
 
-    on<SaveCategoryTransactionEvent>((event, emit) {
-      database.addCategory(CategoryTransactionCompanion.insert(
+    on<SaveCategoryTransactionEvent>((event, emit) async {
+      await database.addCategory(CategoryTransactionCompanion.insert(
         name: event.name,
         type: event.type.toString(),
       ));
@@ -160,9 +160,11 @@ class HomeBloc extends BaseBloc {
       emit(SelectTypeOfCategoryState(event.type));
     });
 
-    on<DeleteCategoryTransactionEvent>((event, emit) {
-      database.deleteCategory(event.id);
+    on<DeleteCategoryTransactionEvent>((event, emit) async {
+      await database.deleteCategory(event.id);
+
       add(GetListCategoryTransaction());
+      emit(DeleteCategoryTransactionState());
     });
   }
 }

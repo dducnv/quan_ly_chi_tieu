@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/bloc/calculate_percentage_bloc/calculate_percentage_bloc.dart';
 import 'package:quan_ly_chi_tieu/bloc/currency_conversion_bloc/currency_conversion_bloc.dart';
-import 'package:quan_ly_chi_tieu/routes/route_path.dart';
+import 'package:quan_ly_chi_tieu/main_home_page.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:easy_localization/easy_localization.dart';
@@ -19,7 +19,6 @@ import 'package:quan_ly_chi_tieu/routes/route.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
   await initializeDateFormatting("vi_VN", null);
   Intl.defaultLocale = "vi_VN";
 
@@ -79,7 +78,7 @@ class MainApp extends StatelessWidget {
           typography: Typography.material2014(),
         ),
         onGenerateRoute: AppRouter.generateRoute,
-        initialRoute: RoutePaths.mainHomePage,
+        home: const MainHomePage(),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quan_ly_chi_tieu/bloc/analytic_bloc/analytic_bloc.dart';
 import 'package:quan_ly_chi_tieu/bloc/analytic_bloc/analytic_event.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
+import 'package:quan_ly_chi_tieu/ui/pages/analytics/components/trans_history_component.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/app_button_custom_widget.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/month_selector.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/analytics/widgets/trans_his_list.dart';
@@ -172,6 +173,14 @@ class TransactionsHistoryPageState extends State<TransactionsHistoryPage>
             const Text("Danh sách giao dịch", style: TextStyle(fontSize: 20.0)),
         centerTitle: true,
         elevation: 1,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showPopupSearchTransHis();
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50.0),
           child: Container(

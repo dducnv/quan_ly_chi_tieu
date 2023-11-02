@@ -16,7 +16,8 @@ dependencies:
   flutter_svg: 2.0.7
   flutter_local_notifications: 15.1.1
   auto_size_text: 3.0.0
-
+  fl_chart: 0.64.0
+  syncfusion_flutter_charts: 23.1.43
   #local
   intl: ^0.18.0
   local_auth: 2.1.7

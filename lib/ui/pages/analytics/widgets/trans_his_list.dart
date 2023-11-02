@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/analytics/widgets/trans_his_card_widget.dart';
+import 'package:quan_ly_chi_tieu/ui/pages/analytics/widgets/trans_total_by_month.dart';
 
 class TransHisList extends StatelessWidget {
   const TransHisList(
@@ -45,7 +46,15 @@ class TransHisList extends StatelessWidget {
             return ListView(
               controller: scrollController,
               shrinkWrap: true,
-              children: transactionsWidgets,
+              children: [
+                TransTotalByMonth(
+                  startDate: startDate,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ...transactionsWidgets,
+              ],
             );
           }
           return const Center(child: CircularProgressIndicator());

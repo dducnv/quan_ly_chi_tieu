@@ -121,24 +121,80 @@ class ExpenseManagementDb extends _$ExpenseManagementDb {
         .watch();
   }
 
-  Stream<List<Map<String, double>>> getTotalIncomeAndExpenseByMonth(
-      {DateTime? startDate, DateTime? endDate}) {
-    DateTime? start =
-        startDate == null ? null : DateTime(startDate.year, startDate.month);
-    DateTime? end =
-        endDate == null ? null : DateTime(endDate.year, endDate.month);
+  Stream<Map<String, double>> getTotalIncomeAndExpenseByMonth({
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async* {
+    // Start and end dates must be equal to or less than the current date.
+    startDate ??= DateTime.now();
+    endDate ??= DateTime.now();
+    if (startDate.isAfter(endDate)) {
+      throw ArgumentError('Start date must be less than or equal to end date.');
+    }
 
+    // Create a SQL query to group transactions by type and calculate the total amount for each type.
     final query = selectOnly(transactionsHistory, distinct: true)
-      ..addColumns([transactionsHistory.type, transactionsHistory.amount.sum()])
-      ..where(onlyShowBasedOnTimeRange(transactionsHistory, start, end))
-      ..where(transactionsHistory.type.equals("income") |
-          transactionsHistory.type.equals("expense"));
+      ..addColumns([
+        transactionsHistory.type,
+        transactionsHistory.amount.sum(),
+      ])
+      ..where(onlyShowBasedOnTimeRange(transactionsHistory, startDate, endDate))
+      ..where(transactionsHistory.type.contains('income') |
+          transactionsHistory.type.contains('expense'))
+      ..groupBy([transactionsHistory.type]);
 
-    return query.map((row) {
+    Map<String, double> groupedTransactions = {};
+
+    // Execute the query and yield the results.
+    for (final row in await query.get()) {
       final type = row.read(transactionsHistory.type) as String;
-      final total = row.read(transactionsHistory.amount.sum()) ?? 0;
-      return {type: total};
-    }).watch();
+      final total = row.read(transactionsHistory.amount.sum()) as double;
+      groupedTransactions.addEntries([
+        MapEntry<String, double>(type, total),
+      ]);
+    }
+    yield groupedTransactions;
+  }
+
+  Stream<List<Map<dynamic, dynamic>>> getTotalTransactionGroupByCategoryName({
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async* {
+    startDate ??= DateTime.now();
+    endDate ??= DateTime.now();
+    // Create a query to get the total amount of transactions by name.
+    final query = selectOnly(transactionsHistory, distinct: true)
+      ..addColumns([
+        transactionsHistory.type,
+        transactionsHistory.name.lower().count(),
+        transactionsHistory.name.lower(),
+        transactionsHistory.amount.sum(),
+      ])
+      ..where(onlyShowBasedOnTimeRange(transactionsHistory, startDate, endDate))
+      ..groupBy([transactionsHistory.name.lower()]);
+
+    // Execute the query and get the results.
+
+    // Convert the results to a list of maps.
+    final List<Map<dynamic, dynamic>> groupedTransactions = [];
+    for (final row in await query.get()) {
+      final type = row.read(transactionsHistory.type) as String;
+      final name = row.read(transactionsHistory.name.lower()) as String;
+      final count = row.read(transactionsHistory.name.lower().count()) as int;
+      final total = row.read(transactionsHistory.amount.sum()) as double;
+      groupedTransactions.add(
+        {
+          'count': count,
+          'type': type,
+          'name': name,
+          'total': total,
+        },
+      );
+    }
+
+    // Close the transaction.
+
+    yield groupedTransactions;
   }
 
   Stream<List<TransactionsHistoryData>> getTransactionWithDay(DateTime date) {

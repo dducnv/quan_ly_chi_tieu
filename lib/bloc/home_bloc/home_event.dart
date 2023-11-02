@@ -86,7 +86,7 @@ class GetSpendingLimitEvent extends HomeEvent {
 
 class GetListCategoryTransaction extends HomeEvent {
   @override
-  List<Object> get props => [];
+  List<Object> get props => [DateTime.now().microsecondsSinceEpoch];
 }
 
 class SelectTypeOfCategoryEvent extends HomeEvent {

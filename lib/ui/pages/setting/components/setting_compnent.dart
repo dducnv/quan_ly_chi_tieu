@@ -49,6 +49,28 @@ extension SettingComponent on SettingPageState {
               maxLength: 60,
               scrollPadding: const EdgeInsets.all(10),
               autofocus: true,
+              onSubmitted: (value) {
+                if (textAddCategoryController.text.isEmpty) {
+                  AppPopUp.showPopup(
+                      context: context,
+                      isShowButtonSelect: false,
+                      textCancel: "Đã hiểu",
+                      childMessage: const Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: TextFont(
+                          text: "Bạn chưa nhập tên danh mục",
+                          fontSize: 16,
+                        ),
+                      ));
+                  return;
+                }
+                context.read<HomeBloc>().add(SaveCategoryTransactionEvent(
+                      name: textAddCategoryController.text,
+                      type: typeOfTransactionSelected.name,
+                    ));
+                textAddCategoryController.text = "";
+                Navigator.pop(context);
+              },
               decoration: InputDecoration(
                 hintText: "Tên giao dịch",
                 counterText: "",

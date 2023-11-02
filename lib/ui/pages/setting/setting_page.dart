@@ -25,6 +25,11 @@ class SettingPage extends StatefulWidget {
 
 class SettingPageState extends State<SettingPage> {
   String addressSaveBackups = "";
+  bool isShowTitleAppBar = false;
+  List<CategoryTransactionData> listCategoryIncome = [];
+  List<CategoryTransactionData> listCategoryExpense = [];
+  late ScrollController scrollController;
+  bool switchValue = false;
   late TextEditingController textAddCategoryController;
   Future<void> initSettingPage() async {
     addressSaveBackups =
@@ -37,12 +42,40 @@ class SettingPageState extends State<SettingPage> {
   void initState() {
     super.initState();
     textAddCategoryController = TextEditingController();
+    scrollController = ScrollController();
+    listCategoryIncome = context
+        .read<HomeBloc>()
+        .listCategoryTransaction
+        .where((element) => element.type.contains(TransactionType.income.name))
+        .toList();
+    listCategoryExpense = context
+        .read<HomeBloc>()
+        .listCategoryTransaction
+        .where((element) => element.type.contains(TransactionType.expense.name))
+        .toList();
+    scrollController.addListener(() {
+      if (scrollController.offset > 100) {
+        if (isShowTitleAppBar == false) {
+          setState(() {
+            isShowTitleAppBar = true;
+          });
+        }
+      } else {
+        if (isShowTitleAppBar == true) {
+          setState(() {
+            isShowTitleAppBar = false;
+          });
+        }
+      }
+    });
+
     initSettingPage();
   }
 
   @override
   void dispose() {
     textAddCategoryController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -51,30 +84,126 @@ class SettingPageState extends State<SettingPage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: CustomScrollView(slivers: [
+          child: CustomScrollView(controller: scrollController, slivers: [
             SliverAppBar(
-              pinned: false,
+              pinned: true,
+              elevation: 0,
               backgroundColor: Colors.white,
+              title: AnimatedOpacity(
+                curve: Curves.easeIn,
+                opacity: isShowTitleAppBar ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 100),
+                child: const TextFont(
+                  text: "Cấu hình & Cài đặt",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               expandedHeight: MediaQuery.of(context).size.height * 0.4,
               flexibleSpace: FlexibleSpaceBar(
+                expandedTitleScale: 1.2,
                 background: Container(
                   color: Colors.white,
-                  child: const Center(
-                      child: Text(
-                    "Cấu hình & Cài đặt",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  child: Center(
+                      child: AnimatedOpacity(
+                    opacity: !isShowTitleAppBar ? 1.0 : 0.0,
+                    curve: Curves.easeIn,
+                    duration: const Duration(milliseconds: 100),
+                    child: const Text(
+                      "Cấu hình & Cài đặt",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
                   )),
                 ),
               ),
             ),
-            SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                sliver: SliverToBoxAdapter(
-                  child: SingleChildScrollView(
-                      child: Column(
+            SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // SettingCard(
+                      //   title: "Cấu hình hiển thị",
+                      //   children: [
+                      //     Card(
+                      //       elevation: 0,
+                      //       color: Theme.of(context)
+                      //           .colorScheme
+                      //           .primaryContainer
+                      //           .withOpacity(0.4),
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.symmetric(
+                      //             horizontal: 10, vertical: 10),
+                      //         child: Row(
+                      //           mainAxisAlignment:
+                      //               MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             const TextFont(
+                      //               text: "Sử dụng tính năng số dư",
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w500,
+                      //             ),
+                      //             Switch(
+                      //               activeColor: Theme.of(context)
+                      //                   .colorScheme
+                      //                   .primary
+                      //                   .withOpacity(0.8),
+                      //               value: switchValue,
+                      //               onChanged: (value) {
+                      //                 setState(() {
+                      //                   switchValue = value;
+                      //                 });
+                      //               },
+                      //               activeTrackColor: Theme.of(context)
+                      //                   .colorScheme
+                      //                   .primary
+                      //                   .withOpacity(0.3),
+                      //             )
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     Card(
+                      //       elevation: 0,
+                      //       color: Theme.of(context)
+                      //           .colorScheme
+                      //           .primaryContainer
+                      //           .withOpacity(0.4),
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.symmetric(
+                      //             horizontal: 10, vertical: 10),
+                      //         child: Row(
+                      //           mainAxisAlignment:
+                      //               MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             const TextFont(
+                      //               text: "Ngôn ngữ",
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w500,
+                      //             ),
+                      //             DropdownButtonHideUnderline(
+                      //               child: DropdownButton<String>(
+                      //                 value: 'Tiếng Việt',
+                      //                 items: <String>['Tiếng Việt', 'Tiếng Anh']
+                      //                     .map((String value) {
+                      //                   return DropdownMenuItem<String>(
+                      //                     value: value,
+                      //                     child: Text(value),
+                      //                   );
+                      //                 }).toList(),
+                      //                 onChanged: (_) {},
+                      //               ),
+                      //             )
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
+
                       SettingCard(
                         title: "Quản lý danh mục",
                         titleRightButton: SizedBox(
@@ -95,34 +224,22 @@ class SettingPageState extends State<SettingPage> {
                                 buildWhen: (previous, current) =>
                                     current is GetListCategoryTransactionState,
                                 builder: (context, state) {
-                                  List<CategoryTransactionData>
-                                      listCategoryIncome = [];
-                                  List<CategoryTransactionData>
-                                      listCategoryExpense = [];
-                                  if (state
-                                      is GetListCategoryTransactionState) {
-                                    {
-                                      listCategoryIncome.clear();
-                                      listCategoryExpense.clear();
-                                      listCategoryIncome = context
-                                          .read<HomeBloc>()
-                                          .listCategoryTransaction
-                                          .where((element) => element.type
-                                              .contains(
-                                                  TransactionType.income.name))
-                                          .toList();
-                                      listCategoryExpense = context
-                                          .read<HomeBloc>()
-                                          .listCategoryTransaction
-                                          .where((element) => element.type
-                                              .contains(
-                                                  TransactionType.expense.name))
-                                          .toList();
-                                    }
-                                  }
-
+                                  listCategoryIncome = context
+                                      .read<HomeBloc>()
+                                      .listCategoryTransaction
+                                      .where((element) => element.type.contains(
+                                          TransactionType.income.name))
+                                      .toList();
+                                  listCategoryExpense = context
+                                      .read<HomeBloc>()
+                                      .listCategoryTransaction
+                                      .where((element) => element.type.contains(
+                                          TransactionType.expense.name))
+                                      .toList();
                                   return ListView(
                                     primary: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     children: <Widget>[
                                       const TextFont(
@@ -223,14 +340,13 @@ class SettingPageState extends State<SettingPage> {
                             Expanded(
                               flex: 4,
                               child: Card(
+                                elevation: 0,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer
+                                    .withOpacity(0.4),
                                 child: ListTile(
                                   onTap: () async {
-                                    String? selectedDirectory = await FilePicker
-                                        .platform
-                                        .getDirectoryPath();
-                                    if (selectedDirectory == null) {
-                                      return;
-                                    }
                                     String status = await backupDb();
                                     if (status == "success") {
                                       // ignore: use_build_context_synchronously
@@ -247,8 +363,8 @@ class SettingPageState extends State<SettingPage> {
                                     }
                                   },
                                   title: const Text("Sao lưu dữ liệu"),
-                                  subtitle: Text(
-                                      "Địa chỉ lưu: ${addressSaveBackups ?? "/Downloads"}"),
+                                  subtitle:
+                                      Text("Địa chỉ lưu: $addressSaveBackups"),
                                 ),
                               ),
                             ),
@@ -305,6 +421,11 @@ class SettingPageState extends State<SettingPage> {
                           ],
                         ),
                         Card(
+                            elevation: 0,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withOpacity(0.4),
                             child: ListTile(
                                 onTap: () async {
                                   FilePickerResult? result =
@@ -324,7 +445,7 @@ class SettingPageState extends State<SettingPage> {
                       ])
                     ],
                   )),
-                )),
+            ),
           ]),
         ));
   }
