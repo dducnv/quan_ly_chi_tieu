@@ -70,6 +70,14 @@ class MainApp extends StatelessWidget {
         navigatorKey: UserManagement().navigatorKey,
         debugShowCheckedModeBanner: false,
         themeAnimationDuration: const Duration(milliseconds: 700),
+        builder: (context, child) {
+          return MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: const TextScaler.linear(1.0)),
+              child: SafeArea(
+                child: child!,
+              ));
+        },
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           useMaterial3: true,
@@ -77,6 +85,19 @@ class MainApp extends StatelessWidget {
           primaryColor: const Color(0xFFc2e7ff),
           typography: Typography.material2014(),
         ),
+        darkTheme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.blue,
+            brightness: Brightness.dark,
+          ),
+          snackBarTheme: const SnackBarThemeData(
+            backgroundColor: Colors.black,
+            contentTextStyle: TextStyle(color: Colors.white),
+            actionTextColor: Colors.blue,
+          ),
+          useMaterial3: true,
+        ),
+        themeMode: ThemeMode.light,
         onGenerateRoute: AppRouter.generateRoute,
         home: const MainHomePage(),
       ),

@@ -207,6 +207,16 @@ String convertToMoney(double amount, {String? currency}) {
   return formatCurrency.format(amount);
 }
 
+String convertToMoneyWithoutSymbol(double amount, {String? currency}) {
+  final locale = currency != null ? localeMap[currency] : 'en';
+  final formatCurrency = NumberFormat.currency(locale: locale, symbol: '');
+
+  return formatCurrency.format(amount);
+}
+
+String formatNumber(String s) =>
+    NumberFormat.decimalPattern('en').format(int.parse(s));
+
 //e.g. Today/Yesterday/Tomorrow/Tuesday/ Thursday, September 15
 getWordedDate(DateTime date,
     {bool includeMonthDate = false, bool includeYearIfNotCurrentYear = true}) {

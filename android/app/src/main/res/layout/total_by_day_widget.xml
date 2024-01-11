@@ -1,0 +1,46 @@
+<!-- res/layout/widget_layout.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_container"
+    android:background="#715FA6" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/headline_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0_00"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+
+     <TextView
+        android:id="@+id/headline_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Description"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:layout_below="@id/headline_title"
+        android:layout_marginTop="2dp"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/widget_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/headline_description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/tieu_vua"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+</RelativeLayout>

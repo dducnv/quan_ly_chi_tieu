@@ -73,9 +73,15 @@ class CurrencyConversionPageState extends State<CurrencyConversionPage> {
               top: true,
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                const Spacer(),
+                const Expanded(
+                    child: Center(
+                  child: Text(
+                    "Chuyển đổi tiền tệ",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                )),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
                   child: Row(
                     children: [
                       Expanded(
@@ -141,7 +147,7 @@ class CurrencyConversionPageState extends State<CurrencyConversionPage> {
                   color: Colors.black12,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
                   child: Row(
                     children: [
                       Expanded(
@@ -200,10 +206,6 @@ class CurrencyConversionPageState extends State<CurrencyConversionPage> {
                       )
                     ],
                   ),
-                ),
-                Text(
-                  "Cập nhật lúc 00:00 ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
                 ),
                 const SizedBox(height: 10),
                 numberButtonWidgetsTopWidget(),

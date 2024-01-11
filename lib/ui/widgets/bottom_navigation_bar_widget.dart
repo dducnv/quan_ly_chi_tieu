@@ -39,11 +39,11 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
     return NavigationBar(
       animationDuration: const Duration(milliseconds: 1000),
       destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.payments_rounded),
-          label: "Quản lý chi tiêu",
-          tooltip: "",
-        ),
+          NavigationDestination(
+            icon: Icon(Icons.payments_rounded),
+            label: "Quản lý chi tiêu",
+            tooltip: "",
+          ),
         NavigationDestination(
           icon: Icon(Icons.swap_horiz_outlined, size: 20),
           label: "Chuyển đổi tiền tệ",

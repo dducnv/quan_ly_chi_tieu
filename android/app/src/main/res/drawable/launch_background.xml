@@ -1,13 +1,31 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-<item
- android:drawable="@android:color/white"/>
-<!--  You can insert your own image assets here  -->
-   <item>
+
+      <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#715FA6"/>
+        </shape>
+    </item>
+
+    <!-- You can insert your own image assets here -->
+    <item>
         <bitmap
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:gravity="center"
+            android:background="#715FA6"
             android:src="@mipmap/ic_launcher" />
-    </item> 
+    </item>
+
+    <item android:gravity="center">
+        <bitmap
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#715FA6"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitCenter"/>
+    </item>
+
 </layer-list>

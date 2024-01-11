@@ -36,12 +36,9 @@ class CalcutatePercentageCard extends StatelessWidget {
                   child: ListTile(
                     onTap: () {
                       Navigator.pushNamed(
-                          context, RoutePaths.calculatePercentageViewPage,
-                          arguments: {
-                            'conditionSwitchWidget':
-                                calPercentMenuList[index].conditionName,
-                            'title': calPercentMenuList[index].name
-                          });
+                        context,
+                        calPercentMenuList[index].routeName,
+                      );
                     },
                     title: Text(calPercentMenuList[index].name),
                     subtitle: Text(calPercentMenuList[index].recipe),

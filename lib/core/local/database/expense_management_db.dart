@@ -205,6 +205,21 @@ class ExpenseManagementDb extends _$ExpenseManagementDb {
     return query.watch();
   }
 
+  Stream<double> getTotalExpenseByDay(DateTime dateTime) async* {
+    final query = selectOnly(transactionsHistory, distinct: true)
+      ..addColumns([
+        transactionsHistory.type,
+        transactionsHistory.amount.sum(),
+      ])
+      ..where(transactionsHistory.type.contains('expense') &
+          isOnDay(transactionsHistory.dateCreated, dateTime));
+
+    for (final row in await query.get()) {
+      final total = row.read(transactionsHistory.amount.sum()) as double;
+      yield total;
+    }
+  }
+
   Future<TransactionsHistoryData> getTransactionsHistory(int id) {
     return (select(transactionsHistory)..where((tbl) => tbl.id.equals(1)))
         .getSingle();

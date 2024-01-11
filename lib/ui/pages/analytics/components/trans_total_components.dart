@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/core/utils/function.dart';
@@ -98,6 +99,9 @@ extension AnalyticComponent on TransTotalByMonthState {
                                 height:
                                     MediaQuery.of(context).size.height * 0.3,
                                 child: SfCartesianChart(
+                                  zoomPanBehavior: zoomPan,
+                                  enableMultiSelection: true,
+                                  plotAreaBorderWidth: 0,
                                   title: ChartTitle(
                                     text:
                                         "Biểu đồ thống kê tổng tiền giao dịch",
@@ -105,17 +109,30 @@ extension AnalyticComponent on TransTotalByMonthState {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  primaryXAxis: CategoryAxis(),
+                                  primaryYAxis: NumericAxis(
+                                    isVisible: false,
+                                    numberFormat: NumberFormat.simpleCurrency(
+                                        locale: 'vi_VN'),
+                                    labelStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  primaryXAxis: CategoryAxis(
+                                    majorGridLines:
+                                        const MajorGridLines(width: 0),
+                                  ),
                                   series: <ChartSeries<TransChartModel,
                                       String>>[
                                     ColumnSeries<TransChartModel, String>(
-                                        dataSource: showingSectionsAmount,
-                                        xValueMapper:
-                                            (TransChartModel data, _) =>
-                                                data.name,
-                                        yValueMapper:
-                                            (TransChartModel data, _) =>
-                                                data.value),
+                                      dataSource: showingSectionsAmount,
+                                      xValueMapper: (TransChartModel data, _) =>
+                                          data.name,
+                                      yValueMapper: (TransChartModel data, _) =>
+                                          data.value,
+                                      dataLabelSettings:
+                                          const DataLabelSettings(
+                                              isVisible: true),
+                                    ),
                                   ],
                                 )),
                           ],

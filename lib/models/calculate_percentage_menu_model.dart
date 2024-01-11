@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class CaculatePercenMenuModel {
   String name;
   String recipe;
-  String conditionName;
+  String routeName;
   Color? color;
   CaculatePercenMenuModel(
       {required this.name,
       required this.recipe,
-      required this.conditionName,
+      required this.routeName,
       this.color});
 }
 

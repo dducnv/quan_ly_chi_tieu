@@ -1,4 +1,5 @@
 import 'package:quan_ly_chi_tieu/models/calculate_percentage_menu_model.dart';
+import 'package:quan_ly_chi_tieu/routes/route_path.dart';
 
 //switch condition name
 const String calculatePercentageOfANumber = "calculatePercentageOfANumber";
@@ -18,16 +19,16 @@ List<CaculatePercenMenuModel> calPercentMenuList = [
   CaculatePercenMenuModel(
     name: "Tính % của một số",
     recipe: "Công thức: a * x / 100",
-    conditionName: calculatePercentageOfANumber,
+    routeName: RoutePaths.calculatePercentageOfANumber,
   ),
   CaculatePercenMenuModel(
     name: "Tính % giữa hai số",
     recipe: "Công thức: (x * 100) / a",
-    conditionName: calculatePercentageBetweenTwoNumbers,
+    routeName: calculatePercentageBetweenTwoNumbers,
   ),
   CaculatePercenMenuModel(
     name: "Tính % tăng hoặc giảm của một số",
     recipe: "Công thức: a +|- (a * x / 100)",
-    conditionName: calculatePercentageIncreaseDecreaseOfANumber,
+    routeName: calculatePercentageIncreaseDecreaseOfANumber,
   ),
 ];

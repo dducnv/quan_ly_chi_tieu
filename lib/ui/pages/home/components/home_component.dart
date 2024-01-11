@@ -9,6 +9,7 @@ import 'package:quan_ly_chi_tieu/core/local/database/expense_management_db.dart'
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/core/utils/debug.dart';
 import 'package:quan_ly_chi_tieu/core/utils/function.dart';
+import 'package:quan_ly_chi_tieu/main_home_page.dart';
 import 'package:quan_ly_chi_tieu/resource/enum.dart';
 import 'package:quan_ly_chi_tieu/routes/route_path.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/home/home_page.dart';
@@ -36,81 +37,78 @@ extension HomeComponent on HomePageState {
           current is GetSpendingLimitState ||
           current is SaveTransactionState,
       builder: (context, state) {
-        String spendingLimit = context.read<HomeBloc>().spendingLimit;
         String balanceAmount = context.read<HomeBloc>().balanceAmount;
-        return spendingLimit.isEmpty
-            ? const SizedBox.shrink()
-            : InkWell(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const TextFont(
-                          text: "Số dư hiện tại",
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                      content: TextFont(
-                        text: balanceAmount.isEmpty
-                            ? "0.00"
-                            : "${convertToMoney(double.parse(balanceAmount))} ",
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Theme.of(context).colorScheme.secondaryContainer,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.account_balance_wallet_rounded,
-                        color: Colors.black,
-                      ),
-                      const SizedBox(width: 5),
-                      AnimatedSize(
-                        duration: const Duration(milliseconds: 700),
-                        clipBehavior: Clip.none,
-                        curve: Curves.elasticOut,
-                        child: AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 900),
-                          switchInCurve: const ElasticOutCurve(0.6),
-                          switchOutCurve: const ElasticInCurve(0.6),
-                          transitionBuilder:
-                              (Widget child, Animation<double> animation) {
-                            final inAnimation = Tween<Offset>(
-                                    begin: const Offset(0.0, 1),
-                                    end: const Offset(0.0, 0.0))
-                                .animate(animation);
-                            return ClipRect(
-                              clipper: BottomClipper(),
-                              child: SlideTransition(
-                                position: inAnimation,
-                                child: child,
-                              ),
-                            );
-                          },
-                          child: TextFont(
-                            key: ValueKey(balanceAmount),
-                            text: balanceAmount.isEmpty
-                                ? "0.00"
-                                : convertToMoney(double.parse(balanceAmount)),
-                            textAlign: TextAlign.left,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+        return InkWell(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const TextFont(
+                    text: "Số dư hiện tại",
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+                content: TextFont(
+                  text: balanceAmount.isEmpty
+                      ? "0.00"
+                      : "${convertToMoney(double.parse(balanceAmount))} ",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Theme.of(context).colorScheme.secondaryContainer,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.account_balance_wallet_rounded,
+                  color: Colors.black,
+                ),
+                const SizedBox(width: 5),
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 700),
+                  clipBehavior: Clip.none,
+                  curve: Curves.elasticOut,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 900),
+                    switchInCurve: const ElasticOutCurve(0.6),
+                    switchOutCurve: const ElasticInCurve(0.6),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      final inAnimation = Tween<Offset>(
+                              begin: const Offset(0.0, 1),
+                              end: const Offset(0.0, 0.0))
+                          .animate(animation);
+                      return ClipRect(
+                        clipper: BottomClipper(),
+                        child: SlideTransition(
+                          position: inAnimation,
+                          child: child,
                         ),
-                      ),
-                    ],
+                      );
+                    },
+                    child: TextFont(
+                      key: ValueKey(balanceAmount),
+                      text: balanceAmount.isEmpty
+                          ? "0.00"
+                          : convertToMoney(double.parse(balanceAmount)),
+                      textAlign: TextAlign.left,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              );
+              ],
+            ),
+          ),
+        );
       },
     );
   }
@@ -153,13 +151,11 @@ extension HomeComponent on HomePageState {
                       current is SaveTransactionState ||
                       current is SaveSpendingLimitState,
                   builder: (context, state) {
-                    String balanceAmount =
-                        context.watch<HomeBloc>().balanceAmount;
                     String spendingLimit =
                         context.watch<HomeBloc>().spendingLimit;
                     return spendingLimit.isNotEmpty
                         ? showSpendingLimit()
-                        : showBalance(balanceAmount);
+                        : showTotalExpense();
                   },
                 ),
               ],
@@ -261,6 +257,97 @@ extension HomeComponent on HomePageState {
               ),
             );
           },
+        );
+      },
+    );
+  }
+
+  Widget showTotalExpense() {
+    return StreamBuilder<double?>(
+      stream: database.getTotalExpenseByDay(DateTime.now()),
+      builder: (context, snapshot) {
+        updateHeadline(
+          title: convertToMoney(double.parse(
+              snapshot.data == null ? "0" : snapshot.data.toString())),
+          amount: double.parse(
+              snapshot.data == null ? "0" : snapshot.data.toString()),
+        );
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: 3),
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 200),
+                  child: TextFont(
+                    text: "Tổng chi tiêu hôm nay",
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    textColor: Colors.black,
+                    translate: false,
+                  ),
+                ),
+              ),
+              AnimatedSize(
+                duration: const Duration(milliseconds: 700),
+                clipBehavior: Clip.none,
+                curve: Curves.elasticOut,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 900),
+                  switchInCurve: const ElasticOutCurve(0.6),
+                  switchOutCurve: const ElasticInCurve(0.6),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    final inAnimation = Tween<Offset>(
+                            begin: const Offset(0.0, 1),
+                            end: const Offset(0.0, 0.0))
+                        .animate(animation);
+                    return ClipRect(
+                      clipper: BottomClipper(),
+                      child: SlideTransition(
+                        position: inAnimation,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: SizedBox(
+                    key: ValueKey(snapshot.data ?? 0.0),
+                    height: 67,
+                    child: TextFont(
+                        text: snapshot.data == null
+                            ? "0.00"
+                            : "-${convertToMoney(double.parse(snapshot.data.toString()))}",
+                        fontSize: 55,
+                        fontWeight: FontWeight.bold,
+                        autoSizeText: true,
+                        minFontSize: 15,
+                        maxFontSize: 55,
+                        maxLines: 2,
+                        translate: false,
+                        textColor: snapshot.data == null
+                            ? Colors.black
+                            : snapshot.data != null
+                                ? Colors.red
+                                : Colors.black),
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 200),
+                  child: TextFont(
+                    text: "Thêm giới hạn chi tiêu",
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    textColor: Colors.grey,
+                    translate: false,
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

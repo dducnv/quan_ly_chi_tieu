@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/analytics/transactions_history_page.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/popup_custom.dart';
@@ -10,39 +9,26 @@ extension TransHistoryComponents on TransactionsHistoryPageState {
       child: SizedBox(
           height: MediaQuery.of(context).size.height * 0.6,
           child: SingleChildScrollView(
-            child: Column(children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16, right: 16, top: 16),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Tìm kiếm",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        controller: textController,
-                        focusNode: focusNodeTextInput,
-                        onChanged: (value) {
-                          searchTerm = value;
-                        },
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(children: [
+                TextField(
+                  maxLength: 40,
+                  focusNode: focusNodeTextInput,
+                  decoration: InputDecoration(
+                    hintText: "Tìm kiếm",
+                    counterText: "",
+                    hintStyle: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(0.5),
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      textController.clear();
-                      searchTerm = null;
-                      focusNodeTextInput.unfocus();
-                    },
-                    icon: const Icon(Icons.clear),
-                  )
-                ],
-              )
-            ]),
+                  onChanged: (value) {},
+                ),
+              ]),
+            ),
           )),
     );
   }

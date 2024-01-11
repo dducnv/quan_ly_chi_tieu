@@ -3,6 +3,7 @@ import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/core/utils/function.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/analytics/components/trans_total_components.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/app_button_custom_widget.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TransTotalByMonth extends StatefulWidget {
   final DateTime startDate;
@@ -16,10 +17,17 @@ class TransTotalByMonth extends StatefulWidget {
 class TransTotalByMonthState extends State<TransTotalByMonth>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  late ZoomPanBehavior zoomPan;
 
   @override
   void initState() {
     super.initState();
+    zoomPan = ZoomPanBehavior(
+      enableDoubleTapZooming: true,
+      enablePanning: true,
+      enablePinching: true,
+      enableSelectionZooming: true,
+    );
     tabController = TabController(length: 2, vsync: this);
   }
 
