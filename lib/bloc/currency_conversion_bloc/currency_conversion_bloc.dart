@@ -109,12 +109,8 @@ class CurrencyConversionBloc extends BaseBloc {
 
   void _handleReverseCurrency(ReverseCurrencyEvent event, Emitter emit) {
     String temp = firstCurrency;
-    String tempResult = resultRate.toString();
-
     firstCurrency = secondCurrency;
     secondCurrency = temp;
-
-    enteredAmount = tempResult;
     resultRate = "0";
     add(GetDefaultCurrencyEvent());
     add(HandleConversionEvent());

@@ -34,13 +34,13 @@ class TotalByDayWidget : AppWidgetProvider() {
                 val desc = widgetData.getString("headline_description", null)
                 setTextViewText(R.id.headline_description, desc ?: "No description set")
 
-                // val imgPath = widgetData.getString("widget_image", null)
-                // if (imgPath != null) {
-                //     val imgResourceId = context.resources.getIdentifier(imgPath, "drawable", context.packageName)
-                //     if (imgResourceId != 0) {
-                //         setImageViewResource(R.id.widget_image, imgResourceId)
-                //     }
-                // }
+                val imgPath = widgetData.getString("widget_image", null)
+                if (imgPath != null) {
+                    val imgResourceId = context.resources.getIdentifier(imgPath, "drawable", context.packageName)
+                    if (imgResourceId != 0) {
+                        setImageViewResource(R.id.widget_image, imgResourceId)
+                    }
+                }
                 val targetPackageName = "com.example.quan_ly_chi_tieu" // Replace with the package name of the app you want to open
                 val intent = context.packageManager.getLaunchIntentForPackage(targetPackageName)
 
