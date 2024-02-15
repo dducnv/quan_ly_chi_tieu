@@ -98,7 +98,7 @@ class CurrencyConversionBloc extends BaseBloc {
       emit(HandleConversionState());
       return;
     }
-    final oCcy = NumberFormat("#,##0.00");
+    final oCcy = NumberFormat("#,##0.00", "en_US");
     resultRate = oCcy
         .format(double.parse(enteredAmount) *
             (currencyConversionModel.conversionRates?[secondCurrency]))

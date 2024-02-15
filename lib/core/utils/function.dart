@@ -201,11 +201,10 @@ final localeMap = {
 };
 
 String convertToMoney(double amount, {String? currency}) {
-  print("amount: $amount");
   final locale = currency != null ? localeMap[currency] : 'vi_VN';
-  final formatCurrency = NumberFormat.decimalPattern(locale);
-
-  return formatCurrency.format(amount);
+  final formatCurrency = NumberFormat.simpleCurrency(locale: locale);
+  final formattedAmount = formatCurrency.format(amount);
+  return formattedAmount;
 }
 
 String convertToMoneyWithoutSymbol(double amount, {String? currency}) {

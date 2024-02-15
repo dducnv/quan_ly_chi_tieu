@@ -79,7 +79,7 @@ extension CurrencyConversionComponent on CurrencyConversionPageState {
               height: 55,
               child: TextFont(
                 text: convertToMoney(
-                    result == '' ? 0 : double.parse(result.replaceAll(".", "")),
+                    result == '' ? 0 : double.parse(result),
                     currency: secondCurrency),
                 fontSize: 50,
                 textAlign: TextAlign.end,
