@@ -30,3 +30,12 @@ class CalculatePercentageIncreaseDecreaseOfANumberState
   @override
   List<Object?> get props => [DateTime.now().microsecondsSinceEpoch, result];
 }
+
+class FindSecondNumberFromFirstNumberPercentState
+    extends CalculatePercentageState {
+  final dynamic result;
+
+  FindSecondNumberFromFirstNumberPercentState({this.result});
+  @override
+  List<Object?> get props => [result];
+}

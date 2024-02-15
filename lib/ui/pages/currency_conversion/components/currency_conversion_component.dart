@@ -78,7 +78,8 @@ extension CurrencyConversionComponent on CurrencyConversionPageState {
             child: SizedBox(
               height: 55,
               child: TextFont(
-                text: convertToMoney(result == '' ? 0 : double.parse(result),
+                text: convertToMoney(
+                    result == '' ? 0 : double.parse(result.replaceAll(".", "")),
                     currency: secondCurrency),
                 fontSize: 50,
                 textAlign: TextAlign.end,
@@ -298,7 +299,7 @@ extension CurrencyConversionComponent on CurrencyConversionPageState {
                   ),
                   NumberButtonWidget(
                     constraints: constraints(),
-                    text: "000",
+                    text: ".",
                     addToAmount: (value) {
                       context
                           .read<CurrencyConversionBloc>()

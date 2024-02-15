@@ -24,11 +24,16 @@ List<CaculatePercenMenuModel> calPercentMenuList = [
   CaculatePercenMenuModel(
     name: "Tính % giữa hai số",
     recipe: "Công thức: (x * 100) / a",
-    routeName: calculatePercentageBetweenTwoNumbers,
+    routeName: RoutePaths.calculatePercentageBetweenTwoNumbersView,
   ),
   CaculatePercenMenuModel(
     name: "Tính % tăng hoặc giảm của một số",
     recipe: "Công thức: a +|- (a * x / 100)",
-    routeName: calculatePercentageIncreaseDecreaseOfANumber,
+    routeName: RoutePaths.calculatePercentageIncreaseDecreaseOfANumber,
+  ),
+  CaculatePercenMenuModel(
+    name: "Tính số a là x% của số b",
+    recipe: "Công thức: (a * 100) / x",
+    routeName: RoutePaths.calculateFindSecondNumberFromFirstNumberPercentView,
   ),
 ];

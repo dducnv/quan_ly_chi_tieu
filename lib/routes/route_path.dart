@@ -11,4 +11,11 @@ class RoutePaths {
 
   static const String calculatePercentageOfANumber =
       '/calculatePercentageOfANumber';
+  static const String calculatePercentageBetweenTwoNumbersView =
+      '/calculatePercentageBetweenTwoNumbersView';
+  static const String calculatePercentageIncreaseDecreaseOfANumber =
+      '/calculatePercentageIncreaseDecreaseOfANumber';
+
+  static const String calculateFindSecondNumberFromFirstNumberPercentView =
+      '/calculateFindSecondNumberFromFirstNumberPercentView';
 }

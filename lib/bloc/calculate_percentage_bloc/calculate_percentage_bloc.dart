@@ -21,5 +21,9 @@ class CalculatePercentageBloc extends BaseBloc {
             result: event.number - (event.number * event.percent / 100)));
       }
     });
+
+    on<FindSecondNumberFromFirstNumberPercentEvent>((event, emit) => emit(
+        FindSecondNumberFromFirstNumberPercentState(
+            result: (event.firstNumber * 100) / event.percent)));
   }
 }

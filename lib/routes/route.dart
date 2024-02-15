@@ -6,6 +6,9 @@ import 'package:quan_ly_chi_tieu/core/utils/debug.dart';
 import 'package:quan_ly_chi_tieu/routes/route_path.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/analytics/transactions_history_page.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/calculate_percentage/views/calculate_percentage_of_a_number_view.dart';
+import 'package:quan_ly_chi_tieu/ui/pages/calculate_percentage/views/find_second_number_from_first_number_percent_view.dart';
+import 'package:quan_ly_chi_tieu/ui/pages/calculate_percentage/views/percentage_between_two_numbers_view.dart';
+import 'package:quan_ly_chi_tieu/ui/pages/calculate_percentage/views/percentage_increase_decrease_of_a_number_view.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/setting/setting_page.dart';
 
 class AppRouter {
@@ -26,6 +29,19 @@ class AppRouter {
       case RoutePaths.calculatePercentageOfANumber:
         widget = const CalculatePercentageOfANumberView();
         break;
+
+      case RoutePaths.calculatePercentageBetweenTwoNumbersView:
+        widget = const PercentageBetweenTwoNumbersView();
+        break;
+
+      case RoutePaths.calculatePercentageIncreaseDecreaseOfANumber:
+        widget = const PercentageIncreaseDecreaseOfANumberView();
+        break;
+
+      case RoutePaths.calculateFindSecondNumberFromFirstNumberPercentView:
+        widget = const FindSecondNumberFromFirstNumberPercentView();
+        break;
+
       default:
         widget = const Scaffold(
           body: SizedBox(

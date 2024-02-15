@@ -49,13 +49,16 @@ class _CalculatePercentageOfANumberViewState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        shadowColor: Colors.transparent.withOpacity(0),
         title: const Text("Tính nhanh"),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text('Tính'),
+        icon: const Icon(Icons.calculate),
         onPressed: () {
           handleCalculate();
         },
-        child: const Icon(Icons.check),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -88,6 +91,9 @@ class _CalculatePercentageOfANumberViewState
 
                     controller: _controllerPercent,
                     onChanged: (value) {
+                      if (value == '') {
+                        return;
+                      }
                       value = formatNumber(value.replaceAll(',', ''));
                       _controllerPercent.value = TextEditingValue(
                         text: value,
@@ -95,6 +101,7 @@ class _CalculatePercentageOfANumberViewState
                             TextSelection.collapsed(offset: value.length),
                       );
                     },
+                    style: const TextStyle(fontSize: 18),
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Phần trăm (%)',
@@ -102,6 +109,7 @@ class _CalculatePercentageOfANumberViewState
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    style: const TextStyle(fontSize: 18),
                     textInputAction: TextInputAction.done,
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
@@ -110,6 +118,9 @@ class _CalculatePercentageOfANumberViewState
                       handleCalculate();
                     },
                     onChanged: (value) {
+                      if (value == '') {
+                        return;
+                      }
                       value = formatNumber(value.replaceAll(',', ''));
                       _controllerNumber.value = TextEditingValue(
                         text: value,

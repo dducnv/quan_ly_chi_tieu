@@ -41,3 +41,17 @@ class CalculatePercentageIncreaseDecreaseOfANumber
         isIncrease,
       ];
 }
+
+class FindSecondNumberFromFirstNumberPercentEvent
+    extends CalculatePercentageEvent {
+  final double firstNumber;
+  final double percent;
+
+  FindSecondNumberFromFirstNumberPercentEvent(
+      {required this.firstNumber, required this.percent});
+  @override
+  List<Object?> get props => [
+        firstNumber,
+        percent,
+      ];
+}
