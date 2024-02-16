@@ -34,14 +34,21 @@ void updateHeadline({
         'headline_description', "Tiết kiệm quá ta :))");
 
     HomeWidget.saveWidgetData<String>('widget_image', "good");
+    HomeWidget.saveWidgetData<String>('widget_container', "tieu_it");
+
   } else if (amount > 100000 && amount <= 300000) {
     HomeWidget.saveWidgetData<String>(
         'headline_description', "Chi tiêu hơi quá tay rồi :))");
     HomeWidget.saveWidgetData<String>('widget_image', "hoi_nhieu_roi");
-  } else if (amount > 300000) {
     HomeWidget.saveWidgetData<String>(
-        'headline_description', "Dừng lại đi!!! \n tiền không phải là vô tận :))");
+        'widget_container', "tieu_vua_bg");
+
+  } else if (amount > 300000) {
+    HomeWidget.saveWidgetData<String>('headline_description',
+        "Dừng lại đi!!! \n tiền không phải là vô tận :))");
     HomeWidget.saveWidgetData<String>('widget_image', "qua_nhieu");
+    HomeWidget.saveWidgetData<String>(
+        'widget_container', "tieu_nhieu");
   }
 
   HomeWidget.updateWidget(

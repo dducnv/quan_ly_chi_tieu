@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- since we only reference this in flutter code, it would get stripped 
+ out otherwise -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+   tools:shrinkMode="strict"
+   tools:keep="@drawable/good,@drawable/qua_nhieu,@drawable/hoi_nhieu_roi,@drawable/tieu_vua_bg,@drawable/tieu_it,@drawable/tieu_nhieu" />

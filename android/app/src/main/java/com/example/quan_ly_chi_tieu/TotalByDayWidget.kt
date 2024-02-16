@@ -24,6 +24,17 @@ class TotalByDayWidget : AppWidgetProvider() {
             val widgetData = HomeWidgetPlugin.getData(context)
             val views = RemoteViews(context.packageName, R.layout.total_by_day_widget).apply {
 
+                val bgColorGradient = widgetData.getString("widget_container", null)
+
+                if(bgColorGradient !=null){
+                    val resourceId = context.resources.getIdentifier(bgColorGradient, "drawable", context.packageName)
+                    setInt(R.id.widget_container, "setBackgroundColor", Color.TRANSPARENT)
+                    if (resourceId != 0) {
+                        setInt(R.id.widget_container, "setBackgroundResource", resourceId)
+                    }
+                }
+
+
                 val title = widgetData.getString("headline_title", null)
             
                 setTextViewText(R.id.headline_title, title ?: "No title set")

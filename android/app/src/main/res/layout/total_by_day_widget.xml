@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/widget_container"
-    android:background="#715FA6" 
-    tools:shrinkMode="strict"
+    android:background="@drawable/tieu_it"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -41,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/good"
+        android:src="@drawable/qua_nhieu"
         android:visibility="visible"
         tools:visibility="visible" />
 
