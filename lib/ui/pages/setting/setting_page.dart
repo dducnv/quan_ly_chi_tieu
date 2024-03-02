@@ -19,6 +19,7 @@ import 'package:quan_ly_chi_tieu/ui/widgets/popup_custom.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/tappable.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/text_font.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -86,7 +87,6 @@ class SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
         backgroundColor: Colors.white,
         body: SafeArea(
           child: CustomScrollView(
@@ -96,8 +96,8 @@ class SettingPageState extends State<SettingPage> {
                 pinned: true,
                 elevation: 0,
                 backgroundColor: Colors.white,
-                actions:const [
-                   FeedbackButton(),
+                actions: const [
+                  FeedbackButton(),
                 ],
                 title: AnimatedOpacity(
                   curve: Curves.easeIn,
@@ -462,7 +462,7 @@ class SettingPageState extends State<SettingPage> {
                       SettingCard(
                         title: "Thông tin ứng dụng",
                         children: [
-                           Card(
+                          Card(
                             elevation: 0,
                             color: Theme.of(context)
                                 .colorScheme
@@ -471,14 +471,13 @@ class SettingPageState extends State<SettingPage> {
                             child: ListTile(
                               onTap: () async {
                                 openUrl(
-                                    "https://github.com/dducnv/quan_ly_chi_tieu");
+                                    "https://github.com/dducnv/quan_ly_chi_tieu",
+                                    mode: LaunchMode.platformDefault);
                               },
                               title: const Text("Cung cấp mã nguồn mở"),
-                              subtitle:
-                                  const Text("github.com/..."),
+                              subtitle: const Text("github.com/..."),
                             ),
                           ),
-                          
                           Card(
                             elevation: 0,
                             color: Theme.of(context)

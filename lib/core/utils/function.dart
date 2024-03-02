@@ -378,11 +378,13 @@ NumberFormat getNumberFormat({int? decimals}) {
   );
 }
 
-void openUrl(String link) async {
+void openUrl(String link,{
+  LaunchMode? mode,
+}) async {
   if (await canLaunchUrl(Uri.parse(link))) {
     await launchUrl(
       Uri.parse(link),
-      mode: LaunchMode.externalApplication,
+      mode: mode ?? LaunchMode.externalApplication,
     );
   }
 }

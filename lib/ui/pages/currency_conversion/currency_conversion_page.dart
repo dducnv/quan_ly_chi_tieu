@@ -18,6 +18,7 @@ import 'package:quan_ly_chi_tieu/ui/widgets/text_font.dart';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CurrencyConversionPage extends StatefulWidget {
   const CurrencyConversionPage({Key? key}) : super(key: key);
@@ -66,9 +67,9 @@ class CurrencyConversionPageState extends State<CurrencyConversionPage> {
 
     return Scaffold(
       appBar: AppBar(
-        elevation:0,
+        elevation: 0,
         backgroundColor: Colors.transparent,
-        actions: const[
+        actions: const [
           FeedbackButton(),
         ],
       ),
@@ -223,23 +224,24 @@ class CurrencyConversionPageState extends State<CurrencyConversionPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Tappable(
-                        onTap: (){
-                          openUrl("https://www.exchangerate-api.com/");
-                        },
+                          onTap: () {
+                            openUrl("https://www.exchangerate-api.com/",
+                                mode: LaunchMode.platformDefault);
+                          },
                           child: RichText(
-                        text: const TextSpan(children: [
-                          TextSpan(
-                              text: "Data from",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.black)),
-                          TextSpan(
-                              text: " exchangerate-api.com",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold)),
-                        ]),
-                      )),
+                            text: const TextSpan(children: [
+                              TextSpan(
+                                  text: "Data from",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.black)),
+                              TextSpan(
+                                  text: " exchangerate-api.com",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold)),
+                            ]),
+                          )),
                     )
                   ],
                 ),
