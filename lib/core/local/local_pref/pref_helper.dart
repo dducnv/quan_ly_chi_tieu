@@ -51,6 +51,23 @@ class PrefHelper {
     return prefHelper.getString(key);
   }
 
+  //save int
+
+  Future<bool?> saveInt(String key, int value) async {
+    final prefHelper = await SharedPreferences.getInstance();
+    try {
+      return prefHelper.setInt(key, value);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  //read int
+  Future<int?> readInt(String key) async {
+    final prefHelper = await SharedPreferences.getInstance();
+    return prefHelper.getInt(key);
+  }
+
   Future<bool?> removeData(String key) async {
     try {
       final prefHelper = await SharedPreferences.getInstance();

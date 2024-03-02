@@ -1,6 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quan_ly_chi_tieu/bloc/calculate_percentage_bloc/calculate_percentage_bloc.dart';
 import 'package:quan_ly_chi_tieu/bloc/currency_conversion_bloc/currency_conversion_bloc.dart';
+import 'package:quan_ly_chi_tieu/core/local/local_pref/pref_helper.dart';
+import 'package:quan_ly_chi_tieu/core/local/local_pref/pref_keys.dart';
 import 'package:quan_ly_chi_tieu/main_home_page.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -15,7 +20,7 @@ import 'package:quan_ly_chi_tieu/core/local/database/expense_management_db.dart'
 import 'package:quan_ly_chi_tieu/core/local/database/platform/shared.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/routes/route.dart';
-
+final InAppReview inAppReview = InAppReview.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -24,8 +29,8 @@ void main() async {
 
   database = constructDb('expense_management_db');
   tz.initializeTimeZones();
-
   tz.setLocalLocation(tz.getLocation("Asia/Ho_Chi_Minh"));
+  packageInfoGlobal = await PackageInfo.fromPlatform();
   try {
     await database.getBalance();
     await database.getSpendingLimit();
@@ -41,7 +46,21 @@ void main() async {
         dateCreatedUntil: DateTime.now(),
         amount: 0));
   }
+  setSettings();
   runApp(const MainApp());
+}
+
+setSettings() async {
+   numberLogins =  await PrefHelper().readInt(PrefKeys.numberLogin) ?? 0;
+   await PrefHelper().saveInt(PrefKeys.numberLogin, numberLogins + 1);
+
+   if (!kIsWeb) {
+    if (numberLogins == 6 || numberLogins == 15 || numberLogins == 25) {
+      if (await inAppReview.isAvailable()) {
+        inAppReview.requestReview();
+      }
+    }
+  }
 }
 
 class MainApp extends StatelessWidget {

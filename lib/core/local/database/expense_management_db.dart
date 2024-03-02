@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/core/local/seed_data_local.dart';
 part 'expense_management_db.g.dart';
-
+int schemaVersionGlobal = 1;
 class TransactionsHistory extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();

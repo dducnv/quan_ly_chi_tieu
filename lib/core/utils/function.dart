@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/number_symbols_data.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 extension CapExtension on String {
   String get capitalizeFirst =>
@@ -373,4 +374,13 @@ NumberFormat getNumberFormat({int? decimals}) {
     locale: Platform.localeName,
     symbol: "",
   );
+}
+
+void openUrl(String link) async {
+  if (await canLaunchUrl(Uri.parse(link))) {
+    await launchUrl(
+      Uri.parse(link),
+      mode: LaunchMode.externalApplication,
+    );
+  }
 }

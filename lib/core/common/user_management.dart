@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quan_ly_chi_tieu/core/local/local_pref/pref_helper.dart';
 
 class UserManagement {
@@ -26,6 +27,8 @@ class UserManagement {
   int currentNavigator = 0;
   bool isShowPopupDetailsPageAds = true;
   bool isShowPopupTabcateAds = true;
+  
+  late PackageInfo packageInfoGlobal;
 
   /// Preload data
   Future<void> _preloadData() async {

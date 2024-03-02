@@ -6,13 +6,16 @@ import 'package:quan_ly_chi_tieu/bloc/home_bloc/home_bloc.dart';
 import 'package:quan_ly_chi_tieu/bloc/home_bloc/home_state.dart';
 import 'package:quan_ly_chi_tieu/core/local/database/expense_management_db.dart';
 import 'package:quan_ly_chi_tieu/core/local/database/platform/native.dart';
+import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/core/local/local_pref/pref_helper.dart';
 import 'package:quan_ly_chi_tieu/core/local/local_pref/pref_keys.dart';
+import 'package:quan_ly_chi_tieu/core/utils/function.dart';
 import 'package:quan_ly_chi_tieu/resource/enum.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/setting/components/setting_compnent.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/setting/widgets/setting_card.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/app_button_custom_widget.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/popup_custom.dart';
+import 'package:quan_ly_chi_tieu/ui/widgets/tappable.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/text_font.dart';
 import 'package:restart_app/restart_app.dart';
 
@@ -84,42 +87,44 @@ class SettingPageState extends State<SettingPage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: CustomScrollView(controller: scrollController, slivers: [
-            SliverAppBar(
-              pinned: true,
-              elevation: 0,
-              backgroundColor: Colors.white,
-              title: AnimatedOpacity(
-                curve: Curves.easeIn,
-                opacity: isShowTitleAppBar ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 100),
-                child: const TextFont(
-                  text: "Cấu hình & Cài đặt",
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          child: CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                elevation: 0,
+                backgroundColor: Colors.white,
+                title: AnimatedOpacity(
+                  curve: Curves.easeIn,
+                  opacity: isShowTitleAppBar ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 100),
+                  child: const TextFont(
+                    text: "Cấu hình & Cài đặt",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                flexibleSpace: FlexibleSpaceBar(
+                  expandedTitleScale: 1.2,
+                  background: Container(
+                    color: Colors.white,
+                    child: Center(
+                        child: AnimatedOpacity(
+                      opacity: !isShowTitleAppBar ? 1.0 : 0.0,
+                      curve: Curves.easeIn,
+                      duration: const Duration(milliseconds: 100),
+                      child: const Text(
+                        "Cấu hình & Cài đặt",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                    )),
+                  ),
                 ),
               ),
-              expandedHeight: MediaQuery.of(context).size.height * 0.4,
-              flexibleSpace: FlexibleSpaceBar(
-                expandedTitleScale: 1.2,
-                background: Container(
-                  color: Colors.white,
-                  child: Center(
-                      child: AnimatedOpacity(
-                    opacity: !isShowTitleAppBar ? 1.0 : 0.0,
-                    curve: Curves.easeIn,
-                    duration: const Duration(milliseconds: 100),
-                    child: const Text(
-                      "Cấu hình & Cài đặt",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
-                  )),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SingleChildScrollView(
+              SliverToBoxAdapter(
+                child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -333,120 +338,207 @@ class SettingPageState extends State<SettingPage> {
                           ),
                         ],
                       ),
-                      SettingCard(title: "Sao lưu & khôi phục", children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Card(
-                                elevation: 0,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer
-                                    .withOpacity(0.4),
-                                child: ListTile(
-                                  onTap: () async {
-                                    String status = await backupDb();
-                                    if (status == "success") {
-                                      // ignore: use_build_context_synchronously
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              content:
-                                                  Text("Sao lưu thành công")));
-                                    } else {
-                                      // ignore: use_build_context_synchronously
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              content:
-                                                  Text("Sao lưu thất bại")));
-                                    }
-                                  },
-                                  title: const Text("Sao lưu dữ liệu"),
-                                  subtitle:
-                                      Text("Địa chỉ lưu: $addressSaveBackups"),
+                      SettingCard(
+                        title: "Sao lưu & khôi phục",
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: Card(
+                                  elevation: 0,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer
+                                      .withOpacity(0.4),
+                                  child: ListTile(
+                                    onTap: () async {
+                                      String status = await backupDb();
+                                      if (status == "success") {
+                                        // ignore: use_build_context_synchronously
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content: Text(
+                                                    "Sao lưu thành công")));
+                                      } else {
+                                        // ignore: use_build_context_synchronously
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content:
+                                                    Text("Sao lưu thất bại")));
+                                      }
+                                    },
+                                    title: const Text("Sao lưu dữ liệu"),
+                                    subtitle: Text(
+                                        "Địa chỉ lưu: $addressSaveBackups"),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 50,
-                              width: 50,
-                              child: AppButtonCustomWidget(
-                                onPressed: () {
-                                  AppPopUp.showPopup(
-                                      context: context,
-                                      onPressedSelect: () async {
-                                        String? selectedDirectory =
-                                            await FilePicker.platform
-                                                .getDirectoryPath();
-                                        if (selectedDirectory == null) {
-                                          return;
-                                        }
-                                        bool statusSave = await PrefHelper()
-                                            .saveData(
-                                                PrefKeys.folderSavebackups,
-                                                selectedDirectory);
-                                        if (statusSave) {
-                                          setState(() {});
-                                          initSettingPage();
-                                          // ignore: use_build_context_synchronously
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "Thay đổi thành công")));
-                                          // ignore: use_build_context_synchronously
-                                          Navigator.pop(context);
-                                        } else {
-                                          // ignore: use_build_context_synchronously
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "Thay đổi thất bại")));
-                                        }
-                                      },
-                                      childMessage: const Padding(
-                                        padding: EdgeInsets.only(top: 20),
-                                        child: TextFont(
-                                          text:
-                                              "Bạn muốn thay đổi địa chỉ lưu?",
-                                          fontSize: 16,
-                                        ),
-                                      ));
-                                },
-                                text: '',
-                                constraints: const BoxConstraints(),
-                                child: const Center(child: Icon(Icons.folder)),
-                              ),
-                            )
-                          ],
-                        ),
-                        Card(
+                              SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: AppButtonCustomWidget(
+                                  onPressed: () {
+                                    AppPopUp.showPopup(
+                                        context: context,
+                                        onPressedSelect: () async {
+                                          String? selectedDirectory =
+                                              await FilePicker.platform
+                                                  .getDirectoryPath();
+                                          if (selectedDirectory == null) {
+                                            return;
+                                          }
+                                          bool statusSave = await PrefHelper()
+                                              .saveData(
+                                                  PrefKeys.folderSavebackups,
+                                                  selectedDirectory);
+                                          if (statusSave) {
+                                            setState(() {});
+                                            initSettingPage();
+                                            // ignore: use_build_context_synchronously
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        "Thay đổi thành công")));
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.pop(context);
+                                          } else {
+                                            // ignore: use_build_context_synchronously
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        "Thay đổi thất bại")));
+                                          }
+                                        },
+                                        childMessage: const Padding(
+                                          padding: EdgeInsets.only(top: 20),
+                                          child: TextFont(
+                                            text:
+                                                "Bạn muốn thay đổi địa chỉ lưu?",
+                                            fontSize: 16,
+                                          ),
+                                        ));
+                                  },
+                                  text: '',
+                                  constraints: const BoxConstraints(),
+                                  child:
+                                      const Center(child: Icon(Icons.folder)),
+                                ),
+                              )
+                            ],
+                          ),
+                          Card(
                             elevation: 0,
                             color: Theme.of(context)
                                 .colorScheme
                                 .primaryContainer
                                 .withOpacity(0.4),
                             child: ListTile(
-                                onTap: () async {
-                                  FilePickerResult? result =
-                                      await FilePicker.platform.pickFiles();
+                              onTap: () async {
+                                FilePickerResult? result =
+                                    await FilePicker.platform.pickFiles();
 
-                                  if (result == null) {
-                                    return;
-                                  } else {
-                                    bool isSuccess = await importBb(
-                                        result.files.single.path!);
-                                    if (isSuccess) {
-                                      Restart.restartApp();
-                                    }
+                                if (result == null) {
+                                  return;
+                                } else {
+                                  bool isSuccess =
+                                      await importBb(result.files.single.path!);
+                                  if (isSuccess) {
+                                    Restart.restartApp();
                                   }
-                                },
-                                title: const Text("Nhập dữ liệu & khôi phục"))),
-                      ])
+                                }
+                              },
+                              title: const Text("Nhập dữ liệu & khôi phục"),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SettingCard(
+                        title: "Thông tin ứng dụng",
+                        children: [
+                           Card(
+                            elevation: 0,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withOpacity(0.4),
+                            child: ListTile(
+                              onTap: () async {
+                                openUrl(
+                                    "https://github.com/dducnv/quan_ly_chi_tieu");
+                              },
+                              title: const Text("Cung cấp mã nguồn mở"),
+                              subtitle:
+                                  const Text("github.com/..."),
+                            ),
+                          ),
+                          
+                          Card(
+                            elevation: 0,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withOpacity(0.4),
+                            child: ListTile(
+                              onTap: () async {
+                                openUrl(
+                                    "https://docs.google.com/document/d/1Nz05jff2NS6CACQOTr9axn0_rULwTfyAX_shVVLQMqg/edit#heading=h.sqyldmridf41");
+                              },
+                              title: const Text("Chính sách bảo mật"),
+                              subtitle:
+                                  const Text("https://docs.google.com/..."),
+                            ),
+                          ),
+                          Card(
+                            elevation: 0,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withOpacity(0.4),
+                            child: ListTile(
+                              onTap: () async {
+                                openUrl("mailto:contact.ducnv@gmail.com");
+                              },
+                              title: const Text("Liên hệ"),
+                              subtitle: const Text("contact.ducnv@gmail.com"),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Tappable(
+                            borderRadius: 15,
+                            onTap: () {
+                              showLicensePage(
+                                  context: context,
+                                  applicationVersion:
+                                      "${"v${packageInfoGlobal.version}+${packageInfoGlobal.buildNumber}"}, db-v$schemaVersionGlobal",
+                                  applicationLegalese:
+                                      "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: TextFont(
+                                textColor:
+                                    Theme.of(context).colorScheme.tertiary,
+                                fontSize: 15,
+                                text:
+                                    "${"v${packageInfoGlobal.version}+${packageInfoGlobal.buildNumber}"}, db-v$schemaVersionGlobal",
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                  )),
-            ),
-          ]),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }
