@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -20,6 +21,7 @@ import 'package:quan_ly_chi_tieu/core/local/database/expense_management_db.dart'
 import 'package:quan_ly_chi_tieu/core/local/database/platform/shared.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:quan_ly_chi_tieu/routes/route.dart';
+
 final InAppReview inAppReview = InAppReview.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,14 +49,18 @@ void main() async {
         amount: 0));
   }
   setSettings();
-  runApp(const MainApp());
+  runApp(
+    const BetterFeedback(
+      child: MainApp(),
+    ),
+  );
 }
 
 setSettings() async {
-   numberLogins =  await PrefHelper().readInt(PrefKeys.numberLogin) ?? 0;
-   await PrefHelper().saveInt(PrefKeys.numberLogin, numberLogins + 1);
+  numberLogins = await PrefHelper().readInt(PrefKeys.numberLogin) ?? 0;
+  await PrefHelper().saveInt(PrefKeys.numberLogin, numberLogins + 1);
 
-   if (!kIsWeb) {
+  if (!kIsWeb) {
     if (numberLogins == 6 || numberLogins == 15 || numberLogins == 25) {
       if (await inAppReview.isAvailable()) {
         inAppReview.requestReview();

@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/number_symbols_data.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:quan_ly_chi_tieu/core/local/global_db.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -383,4 +385,14 @@ void openUrl(String link) async {
       mode: LaunchMode.externalApplication,
     );
   }
+}
+
+Future<String> writeImageToStorage(Uint8List feedbackScreenshot) async {
+  String date = DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now()); // 2021-12-31_10:59:59 
+
+  final Directory output = await getTemporaryDirectory();
+  final String screenshotFilePath = '${output.path}/feedback_${date}.png';
+  final File screenshotFile = File(screenshotFilePath);
+  await screenshotFile.writeAsBytes(feedbackScreenshot);
+  return screenshotFilePath;
 }

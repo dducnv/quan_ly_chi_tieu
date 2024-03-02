@@ -1,7 +1,12 @@
+import 'package:feedback/feedback.dart';
+import 'package:feedback_gitlab/feedback_gitlab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:quan_ly_chi_tieu/core/utils/debug.dart';
+import 'package:quan_ly_chi_tieu/core/utils/function.dart';
 import 'package:quan_ly_chi_tieu/routes/route_path.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/home/components/home_component.dart';
+import 'package:quan_ly_chi_tieu/ui/widgets/feedback_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,6 +45,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
+          const FeedbackButton(),
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, RoutePaths.settingScreen);

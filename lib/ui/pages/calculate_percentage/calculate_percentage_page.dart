@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/calculate_percentage/data/home_data.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/calculate_percentage/widgets/calcutate_percentage_card.dart';
+import 'package:quan_ly_chi_tieu/ui/widgets/feedback_button.dart';
 
 class CalculatePercentagePage extends StatefulWidget {
   const CalculatePercentagePage({Key? key}) : super(key: key);
@@ -19,6 +20,9 @@ class CalculatePercentagePageState extends State<CalculatePercentagePage> {
           SliverAppBar(
             pinned: false,
             backgroundColor: Colors.white,
+            actions: const [
+              FeedbackButton(),
+            ],
             //55% of screen
             expandedHeight: MediaQuery.of(context).size.height * 0.4,
             flexibleSpace: FlexibleSpaceBar(

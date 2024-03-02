@@ -68,18 +68,17 @@ class CurrencyConversionBloc extends BaseBloc {
     add(HandleConversionEvent());
   }
 
- void _handleEnterAmount(EnterAmountEvent event, Emitter emit) {
-  if (event.amount.contains('..')) {
-    String formattedAmount = event.amount.replaceAll('..', '.');
-    enteredAmount += formattedAmount;
-    emit(EnterAmountState(amount: enteredAmount));
-    add(HandleConversionEvent());
-  } else {
-    enteredAmount += event.amount;
-    emit(EnterAmountState(amount: enteredAmount));
-    add(HandleConversionEvent());
+  void _handleEnterAmount(EnterAmountEvent event, Emitter emit) {
+    String temp = enteredAmount;
+    if (double.tryParse(temp += event.amount) != null) {
+      enteredAmount += event.amount;
+      emit(EnterAmountState(amount: enteredAmount));
+      add(HandleConversionEvent());
+    }else{
+      temp = enteredAmount;
+    }
+
   }
-}
 
   void _handleBackspace(BlackSpaceEvent event, Emitter emit) {
     if (enteredAmount.isEmpty || enteredAmount == '0') {

@@ -14,6 +14,7 @@ import 'package:quan_ly_chi_tieu/resource/enum.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/setting/components/setting_compnent.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/setting/widgets/setting_card.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/app_button_custom_widget.dart';
+import 'package:quan_ly_chi_tieu/ui/widgets/feedback_button.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/popup_custom.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/tappable.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/text_font.dart';
@@ -85,6 +86,7 @@ class SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
         backgroundColor: Colors.white,
         body: SafeArea(
           child: CustomScrollView(
@@ -94,6 +96,9 @@ class SettingPageState extends State<SettingPage> {
                 pinned: true,
                 elevation: 0,
                 backgroundColor: Colors.white,
+                actions:const [
+                   FeedbackButton(),
+                ],
                 title: AnimatedOpacity(
                   curve: Curves.easeIn,
                   opacity: isShowTitleAppBar ? 1.0 : 0.0,

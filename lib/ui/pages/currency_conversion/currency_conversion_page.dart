@@ -8,9 +8,12 @@ import 'package:quan_ly_chi_tieu/bloc/base_bloc/base_state.dart';
 import 'package:quan_ly_chi_tieu/bloc/currency_conversion_bloc/currency_conversion_bloc.dart';
 import 'package:quan_ly_chi_tieu/bloc/currency_conversion_bloc/currency_conversion_state.dart';
 import 'package:quan_ly_chi_tieu/core/utils/debug.dart';
+import 'package:quan_ly_chi_tieu/core/utils/function.dart';
 import 'package:quan_ly_chi_tieu/ui/pages/currency_conversion/components/currency_conversion_component.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/app_button_custom_widget.dart';
+import 'package:quan_ly_chi_tieu/ui/widgets/feedback_button.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/popup_custom.dart';
+import 'package:quan_ly_chi_tieu/ui/widgets/tappable.dart';
 import 'package:quan_ly_chi_tieu/ui/widgets/text_font.dart';
 import 'dart:convert';
 
@@ -62,6 +65,13 @@ class CurrencyConversionPageState extends State<CurrencyConversionPage> {
             : MediaQuery.of(context).size.width);
 
     return Scaffold(
+      appBar: AppBar(
+        elevation:0,
+        backgroundColor: Colors.transparent,
+        actions: const[
+          FeedbackButton(),
+        ],
+      ),
       body: CustomScrollView(
         slivers: [
           SliverFillRemaining(
@@ -206,6 +216,32 @@ class CurrencyConversionPageState extends State<CurrencyConversionPage> {
                       )
                     ],
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Tappable(
+                        onTap: (){
+                          openUrl("https://www.exchangerate-api.com/");
+                        },
+                          child: RichText(
+                        text: const TextSpan(children: [
+                          TextSpan(
+                              text: "Data from",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.black)),
+                          TextSpan(
+                              text: " exchangerate-api.com",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold)),
+                        ]),
+                      )),
+                    )
+                  ],
                 ),
                 const SizedBox(height: 10),
                 numberButtonWidgetsTopWidget(),
