@@ -50,9 +50,7 @@ void main() async {
   }
   setSettings();
   runApp(
-    const BetterFeedback(
-      child: MainApp(),
-    ),
+    const MainApp(),
   );
 }
 

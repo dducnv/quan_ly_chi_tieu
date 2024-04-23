@@ -13,41 +13,43 @@ class FeedbackButton extends StatefulWidget {
 class _FeedbackButtonState extends State<FeedbackButton> {
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        BetterFeedback.of(context).show((feedback) async {
-          // draft an email and send to developer
-          final screenshotFilePath =
-              await writeImageToStorage(feedback.screenshot);
+    return const SizedBox.shrink();
 
-          final Email email = Email(
-            body: feedback.text,
-            subject: 'Samon App Feedback',
-            recipients: ['ducnv0712@gmail.com'],
-            attachmentPaths: [screenshotFilePath],
-            isHTML: false,
-          );
+    //  IconButton(
+    //   onPressed: () {
+    //     BetterFeedback.of(context).show((feedback) async {
+    //       // draft an email and send to developer
+    //       final screenshotFilePath =
+    //           await writeImageToStorage(feedback.screenshot);
 
-          String platformResponse;
+    //       final Email email = Email(
+    //         body: feedback.text,
+    //         subject: 'Samon App Feedback',
+    //         recipients: ['ducnv0712@gmail.com'],
+    //         attachmentPaths: [screenshotFilePath],
+    //         isHTML: false,
+    //       );
 
-          try {
-            await FlutterEmailSender.send(email);
-            platformResponse = 'Cảm ơn bạn đã báo cáo lỗi cho chúng tôi, '
-                'chúng tôi sẽ kiểm tra và sửa lỗi sớm nhất có thể';
-          } catch (error) {
-            platformResponse = error.toString();
-          }
+    //       String platformResponse;
 
-          if (!mounted) return;
+    //       try {
+    //         await FlutterEmailSender.send(email);
+    //         platformResponse = 'Cảm ơn bạn đã báo cáo lỗi cho chúng tôi, '
+    //             'chúng tôi sẽ kiểm tra và sửa lỗi sớm nhất có thể';
+    //       } catch (error) {
+    //         platformResponse = error.toString();
+    //       }
 
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(platformResponse),
-            ),
-          );
-        });
-      },
-      icon: const Icon(Icons.feedback_rounded),
-    );
+    //       if (!mounted) return;
+
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(
+    //           content: Text(platformResponse),
+    //         ),
+    //       );
+    //     });
+    //   },
+    //   icon: const Icon(Icons.feedback_rounded),
+    // );
   }
 }

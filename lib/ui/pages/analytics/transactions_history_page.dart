@@ -172,8 +172,8 @@ class TransactionsHistoryPageState extends State<TransactionsHistoryPage>
         title:
             const Text("Danh sách giao dịch", style: TextStyle(fontSize: 20.0)),
         centerTitle: true,
-        elevation: 1,
-        actions:const [
+        elevation: 0,
+        actions: const [
           FeedbackButton(),
         ],
         bottom: PreferredSize(

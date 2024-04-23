@@ -352,12 +352,18 @@ class SettingPageState extends State<SettingPage> {
                               Expanded(
                                 flex: 4,
                                 child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
                                   elevation: 0,
                                   color: Theme.of(context)
                                       .colorScheme
                                       .primaryContainer
                                       .withOpacity(0.4),
                                   child: ListTile(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
                                     onTap: () async {
                                       String status = await backupDb();
                                       if (status == "success") {
@@ -434,12 +440,18 @@ class SettingPageState extends State<SettingPage> {
                             ],
                           ),
                           Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                             elevation: 0,
                             color: Theme.of(context)
                                 .colorScheme
                                 .primaryContainer
                                 .withOpacity(0.4),
                             child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                               onTap: () async {
                                 FilePickerResult? result =
                                     await FilePicker.platform.pickFiles();
@@ -462,29 +474,35 @@ class SettingPageState extends State<SettingPage> {
                       SettingCard(
                         title: "Thông tin ứng dụng",
                         children: [
+                          // Card(
+                          //   elevation: 0,
+                          //   color: Theme.of(context)
+                          //       .colorScheme
+                          //       .primaryContainer
+                          //       .withOpacity(0.4),
+                          //   child: ListTile(
+                          //     onTap: () async {
+                          //       openUrl(
+                          //           "https://github.com/dducnv/quan_ly_chi_tieu",
+                          //           mode: LaunchMode.platformDefault);
+                          //     },
+                          //     title: const Text("Cung cấp mã nguồn mở"),
+                          //     subtitle: const Text("github.com/..."),
+                          //   ),
+                          // ),
                           Card(
                             elevation: 0,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primaryContainer
-                                .withOpacity(0.4),
-                            child: ListTile(
-                              onTap: () async {
-                                openUrl(
-                                    "https://github.com/dducnv/quan_ly_chi_tieu",
-                                    mode: LaunchMode.platformDefault);
-                              },
-                              title: const Text("Cung cấp mã nguồn mở"),
-                              subtitle: const Text("github.com/..."),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                          ),
-                          Card(
-                            elevation: 0,
                             color: Theme.of(context)
                                 .colorScheme
                                 .primaryContainer
                                 .withOpacity(0.4),
                             child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                               onTap: () async {
                                 openUrl(
                                     "https://docs.google.com/document/d/1Nz05jff2NS6CACQOTr9axn0_rULwTfyAX_shVVLQMqg/edit#heading=h.sqyldmridf41");
@@ -495,12 +513,18 @@ class SettingPageState extends State<SettingPage> {
                             ),
                           ),
                           Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                             elevation: 0,
                             color: Theme.of(context)
                                 .colorScheme
                                 .primaryContainer
                                 .withOpacity(0.4),
                             child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                               onTap: () async {
                                 openUrl("mailto:contact.ducnv@gmail.com");
                               },
@@ -519,7 +543,7 @@ class SettingPageState extends State<SettingPage> {
                               showLicensePage(
                                   context: context,
                                   applicationVersion:
-                                      "${"v${packageInfoGlobal.version}+${packageInfoGlobal.buildNumber}"}, db-v$schemaVersionGlobal",
+                                      "v${packageInfoGlobal.version}",
                                   applicationLegalese:
                                       "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
                             },

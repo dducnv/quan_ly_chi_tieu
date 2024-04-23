@@ -36,22 +36,20 @@ class CalculatePercentagePageState extends State<CalculatePercentagePage> {
               ),
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.all(10),
-            sliver: SliverToBoxAdapter(
-              child: ListView.builder(
-                itemCount: calPercentMenuGroupByCategory.length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return CalcutatePercentageCard(
-                      title: calPercentMenuGroupByCategory[index].name,
-                      calPercentMenuList:
-                          calPercentMenuGroupByCategory[index].listMenu);
-                },
-              ),
+          SliverToBoxAdapter(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: calPercentMenuGroupByCategory.length,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return CalcutatePercentageCard(
+                    title: calPercentMenuGroupByCategory[index].name,
+                    calPercentMenuList:
+                        calPercentMenuGroupByCategory[index].listMenu);
+              },
             ),
-          )
+          ),
         ],
       ),
     );

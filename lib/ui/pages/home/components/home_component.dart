@@ -217,11 +217,11 @@ extension HomeComponent on HomePageState {
                         height: 67,
                         child: TextFont(
                           text: convertToMoney(amount < 0 ? 0 : amount),
-                          fontSize: 55,
+                          fontSize: 40,
                           fontWeight: FontWeight.bold,
                           autoSizeText: true,
                           minFontSize: 15,
-                          maxFontSize: 55,
+                          maxFontSize: 40,
                           maxLines: 2,
                           translate: false,
                         ),
@@ -313,16 +313,16 @@ extension HomeComponent on HomePageState {
                   },
                   child: SizedBox(
                     key: ValueKey(snapshot.data ?? 0.0),
-                    height: 67,
+                    height: 55,
                     child: TextFont(
                         text: snapshot.data == null
                             ? "0.00"
                             : "-${convertToMoney(double.parse(snapshot.data.toString()))}",
-                        fontSize: 55,
+                        fontSize: 45,
                         fontWeight: FontWeight.bold,
                         autoSizeText: true,
                         minFontSize: 15,
-                        maxFontSize: 55,
+                        maxFontSize: 45,
                         maxLines: 2,
                         translate: false,
                         textColor: snapshot.data == null
@@ -455,17 +455,17 @@ extension HomeComponent on HomePageState {
                     clipBehavior: Clip.none,
                     curve: Curves.elasticOut,
                     child: SizedBox(
-                      height: 55,
+                      height: 50,
                       child: TextFont(
                         text: valueEntered == ''
                             ? ""
                             : convertToMoney(double.parse(valueEntered)),
-                        fontSize: 50,
+                        fontSize: 45,
                         fontWeight: FontWeight.bold,
                         maxLines: 1,
                         autoSizeText: true,
                         minFontSize: 15,
-                        maxFontSize: 55,
+                        maxFontSize: 45,
                       ),
                     ),
                   ),

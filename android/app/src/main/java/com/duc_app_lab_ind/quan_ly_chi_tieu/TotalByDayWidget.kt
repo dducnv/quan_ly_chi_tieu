@@ -1,4 +1,4 @@
-package com.example.quan_ly_chi_tieu;
+package com.duc_app_lab_ind.quan_ly_chi_tieu;
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager;
